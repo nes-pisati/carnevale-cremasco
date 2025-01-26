@@ -2,6 +2,8 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import Votes from './pages/frontoffice/Votes'
+import Login from './pages/backoffice/Login';
+import Dashboard from './pages/backoffice/Dashboard';
 
 function App() {
 
@@ -15,8 +17,8 @@ function App() {
       <BrowserRouter>
       <Routes>
         {/* Backoffice */}
-        <Route />
-        <Route />
+        <Route path='/login' element={<Login />}/>
+        <Route path='/dashboard' element={<Dashboard />}/>
         {/* Frontoffice */}
         <Route />
         <Route path='/votes' element={<Votes />}/>

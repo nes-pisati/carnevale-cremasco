@@ -10,9 +10,9 @@ export default function VoteCard({id, title, group, description, onClick, onVote
 
     const handleVote = () => {
         if (onVoteSubmit) {
-            onVoteSubmit(id, rating); // Passa l'id e il rating al componente padre
+            onVoteSubmit(id, rating); 
         }
-        onClick(); // Passa al prossimo carro
+        onClick(); 
     };
 
 
@@ -27,7 +27,7 @@ export default function VoteCard({id, title, group, description, onClick, onVote
                     <fieldset className="flex">
                         <StarRate setRating={setRating}/>
                     </fieldset>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-2xl mt-7" onClick={handleVote}>Vota!</button>
+                    <button className="bg-transparent border-2 border-gray-900 text-slate-900 font-bold py-2 px-4 rounded-3xl mt-5" onClick={handleVote}>Vota!</button>
                 </form>
             </div>
         </>

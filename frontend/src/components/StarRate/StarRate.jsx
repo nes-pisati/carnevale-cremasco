@@ -16,7 +16,6 @@ export default function StarRate({setRating}) {
                                 size={30} 
                                 onClick={() => { 
                                     setRating(currentRate)
-                                    console.log(currentRate);
                                 }}
                                 onMouseEnter={() => setColor(currentRate)}
                                 color={currentRate <= (rateColor || 0)? "#f7c409": "grey"}/>
