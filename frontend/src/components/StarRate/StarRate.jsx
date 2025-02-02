@@ -18,7 +18,7 @@ export default function StarRate({setRating}) {
                                     setRating(currentRate)
                                 }}
                                 onMouseEnter={() => setColor(currentRate)}
-                                color={currentRate <= (rateColor || 0)? "#f7c409": "grey"}/>
+                                color={currentRate <= (rateColor || 0)? "#f7c409": "var(--color-beige)"}/>
                 )
             })}
         </>

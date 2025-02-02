@@ -1,8 +1,6 @@
 const express = require('express')
 const carri = express.Router()
 
-//cloudinary import
-
 //model
 
 const carriModel = require('../../models/carri-mod')
@@ -28,7 +26,17 @@ carri.post('/carri', async (req, res) => {
 carri.get('/carri', async (req, res) => {
     try {
         const allCarri = await carriModel.find().populate({path: 'votes'})
-        return res.status(200).json(allCarri)
+
+        const carriTotVoti = allCarri.map(carro => {
+            const totVoti = carro.votes.reduce((sum, vote) => sum + vote.vote, 0);
+
+            return {
+                ...carro.toObject(),
+                totaleVoti: totVoti
+            }
+        })
+
+        return res.status(200).json(carriTotVoti)
     } catch (error) {
         return res.status(500).json({message: 'Problemi nel caricamento dei carri', error: error})
     }

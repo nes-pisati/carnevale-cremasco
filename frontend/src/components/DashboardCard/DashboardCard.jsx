@@ -1,18 +1,20 @@
 import React from "react";
 
-export default function DashboardCard({title, votes}) {
+export default function DashboardCard({ title, votes, onDelete }) {
     return (
         <>
-            <div class="w-80 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-                <img class="rounded-t-lg h-40 object-cover w-full" src="https://picsum.photos/200/300" alt="" />
-                <div class="p-5">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h5>
-                    <p class="mb-3 text-gray-700 dark:text-gray-400">{votes}</p>
-                    <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-800 rounded-lg hover:bg-red-900">
-                        Azzera
-                    </button>
+            <div className="w-96 sm:w-60 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 flex flex-col h-full min-h-[320px]">
+                <img className="rounded-t-lg h-40 object-cover w-full" src="https://picsum.photos/200/300" alt="" />
+                <div className="p-5 flex flex-col gap-4 flex-grow">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white leading-none">{title}</h5>
+                    <div className="mt-auto flex justify-between items-center">
+                        <p className=" text-gray-700 dark:text-gray-400 mb-0">{votes}</p>
+                        <button className="bg-transparent border-2 border-red-500 text-red-500 font-bold py-1 px-2 rounded-3xl" onClick={onDelete}>
+                            Azzera
+                        </button>
+                    </div>
                 </div>
             </div>
         </>
-    )
+    );
 }
