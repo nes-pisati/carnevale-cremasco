@@ -62,7 +62,7 @@ carri.put('/carri/:id', async (req, res) => {
     const obj = req.body;
     try {
         const editedCarro = await carriModel.findByIdAndUpdate(id, obj);
-        return res.status(200).json(editedPainting)
+        return res.status(200).json(editedCarro)
     } catch (error) {
         return res.status(500).json({message: 'Problemi con la modifica del carro', error: error})
     }
@@ -73,13 +73,22 @@ carri.put('/carri/:id', async (req, res) => {
 carri.delete('/carri/:id', async (req, res) => {
     const carroId = req.params.id;
     try {
-        await carriModel.findByIdAndDelete(carroId);
-        //await carriModel.findByIdAndUpdate({_id: carroId}, {$pull: {votes: vote}})
-        
-        return res.status(200).json({message: 'Carro rimosso correttamente'})
+        const deletedVotes = await votesModel.deleteMany({ carro: carroId });
+        const deletedCarro = await carriModel.findByIdAndDelete(carroId);
+
+        if (!deletedCarro) {
+            return res.status(404).json({ message: 'Carro non trovato' });
+        }
+
+        return res.status(200).json({ 
+            message: 'Carro e voti associati rimossi correttamente',
+            deletedVotes: deletedVotes.deletedCount
+        });
+
     } catch (error) {
-        return res.status(500).json({message: 'Problemi con la cancellazione del carro', error: error})
+        return res.status(500).json({ message: 'Errore nella cancellazione del carro', error });
     }
-})
+});
+
 
 module.exports = carri

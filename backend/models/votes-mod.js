@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const VotesSchema = new mongoose.Schema({
     carro: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Carri'
+        ref: 'Carri',
+        required: true
     },
     vote: {
         type: Number,
