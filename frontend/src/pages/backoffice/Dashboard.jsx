@@ -59,6 +59,7 @@ export default function Dashboard() {
                             key={index}
                             title={carro.title}
                             votes={carro.totaleVoti}
+                            img={carro.image}
                             onDelete={() => deleteVotes({carroId: carro._id})}
                         />
                     )
