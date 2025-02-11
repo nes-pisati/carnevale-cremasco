@@ -6,10 +6,7 @@ import ThankYou from "../../components/ThankYou/ThankYou";
 export default function Votes() {
 
     const [carri, setCarri] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0)
-    // const [checkVote, setCheckVote] = useState(0)
-
-    console.log("Current index on init:", currentIndex);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
         const getCarri = async () => {
@@ -24,16 +21,13 @@ export default function Votes() {
 
     const handleVoteSubmit = async (id, rating) => {
 
-        // setCheckVote(0);
-
-        if (rating === null) {
-            alert("Seleziona un voto prima di inviare!");
-            return;
-        }
+        // if (rating === null) {
+        //     alert("Seleziona un voto prima di inviare!");
+        //     return;
+        // }
 
         try {
-            const vote = await axios.post(`http://localhost:3002/votes/${id}`, { vote: rating });
-            // setCheckVote(vote)
+            await axios.post(`http://localhost:3002/votes/${id}`, { vote: rating });
         } catch (e) {
             console.error(e);
             alert("Errore nell'invio del voto.");
@@ -41,32 +35,27 @@ export default function Votes() {
     }
 
     const handleNext = () => {
-
-        // if(checkVote === 0) {
-        //     return;
-        // }
-        
         if (currentIndex < carri.length) {
             setCurrentIndex(currentIndex + 1)
         }
-
     }
 
     return (
         <>
             {carri.length > 0 && (
-                currentIndex <= carri.length-1 ? (
+                currentIndex <= carri.length - 1 ? (
                     <VoteCard
                         key={carri[currentIndex]._id}
                         id={carri[currentIndex]._id}
                         title={carri[currentIndex].title}
                         group={carri[currentIndex].team}
                         description={carri[currentIndex].description}
+                        img={carri[currentIndex].image}
                         onClick={handleNext}
                         onVoteSubmit={handleVoteSubmit}
                     />
                 ) : (
-                    <ThankYou /> 
+                    <ThankYou />
                 )
             )}
 
